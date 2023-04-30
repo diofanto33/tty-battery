@@ -14,10 +14,22 @@ main()
 	while(1)
 	{
 		fp = fopen(BATTERY_PATH, "r");
+		if(fp == -1)
+		{
+			perror("Error opening file\n");
+			exit(1);
+		}
+
 		fscanf(fp, "%d", &battery);
 		fclose(fp);
 
 		fp = fopen(BATTERY_STATUS_PATH, "r");
+		if(fp == -1)
+		{
+			perror("Error opening file\n");
+			exit(1);
+		}
+
 		char status[12];
 		fscanf(fp, "%s", status);
 		fclose(fp);
