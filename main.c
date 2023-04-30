@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+/* path to battery capacity file */
 #define BATTERY_PATH "/sys/class/power_supply/BAT0/capacity"
 #define BATTERY_STATUS_PATH "/sys/class/power_supply/BAT0/status"
 
