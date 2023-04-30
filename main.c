@@ -1,41 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <fcntl.h>
-/* path to battery capacity file */
-#define BATTERY_PATH "/sys/class/power_supply/BAT0/capacity"
-#define BATTERY_STATUS_PATH "/sys/class/power_supply/BAT0/status"
 
-int 
-main()
-{  
-	FILE *fp;
-	int battery;
-	while(1)
-	{
-		fp = fopen(BATTERY_PATH, "r");
-		if(fp == -1)
-		{
-			perror("Error opening file\n");
-			exit(1);
-		}
+int main() {
+    while (1) {
+		fflush(stdout);
+        FILE *fp = fopen("/sys/class/power_supply/BAT0/capacity", "r");
+        int battery_percentage;
+        fscanf(fp, "%d", &battery_percentage);
+        fclose(fp);
 
-		fscanf(fp, "%d", &battery);
-		fclose(fp);
+        printf("Battery percentage: %d%%", battery_percentage);
+        fflush(stdout);
 
-		fp = fopen(BATTERY_STATUS_PATH, "r");
-		if(fp == -1)
-		{
-			perror("Error opening file\n");
-			exit(1);
-		}
-
-		char status[12];
-		fscanf(fp, "%s", status);
-		fclose(fp);
-
-		printf("%d%% %s\n", battery, status);
-		sleep(2);
-	}
-	return 0;
+        sleep(1);
+    }
+    return 0;
 }
