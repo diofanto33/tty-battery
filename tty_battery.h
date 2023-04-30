@@ -5,16 +5,24 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-struct
+struct ttybattery 
 {
-	int x, y, w, h;      
-    int a, b;
-} geometry;
+    /* while() boolean */
+    bool running;
+	
+	/* geometry */
+	struct
+	{
+		int x, y, w, h;      
+    	int a, b;
+	} geometry;
+
+} ttybattery_t;
 
 /* prototypes */
 void draw_number(int n, int x, int y);
 void draw_battery(int x, int y, int width, int height, int percent);
+void update_hour(void);
 
 /* Number matrix */
 const bool number[][15] =
