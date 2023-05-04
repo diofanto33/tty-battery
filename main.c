@@ -8,7 +8,7 @@
 int main() {
 	
     int res;
-	FILE *fp = NULL;
+    FILE *fp = NULL;
 	char battery_status[20];
 	unsigned int battery_percentage;
 	
