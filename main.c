@@ -32,7 +32,6 @@ main()
 		exit(EXIT_FAILURE);
 	}
 	fclose(fp);
-
 	fp = fopen(BATTERY_STATUS_PATH, "r");
 	if(fp == NULL)
 	{
