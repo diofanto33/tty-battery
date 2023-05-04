@@ -61,9 +61,14 @@ struct ttybattery {
 };
 
 /* prototypes */
+void init(void);
 void draw_number(int n, int x, int y);
 void draw_battery(int x, int y, int width, int height, int percent);
 void update_hour(void);
+void set_center(bool b);
+void set_notify_low_battery(bool b);
+void set_notify_power_source(bool b);
+
 
 /* Number matrix */
 const bool number[][15] =
