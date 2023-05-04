@@ -23,7 +23,7 @@ int main() {
 			exit(EXIT_FAILURE);
 		}
         
-        res = fscanf(fp, "%d", &battery_percentage);
+        	res = fscanf(fp, "%d", &battery_percentage);
 		if(res != 1)
 		{
 			perror("Error while reading battery percentage");
