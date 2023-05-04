@@ -5,6 +5,11 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ncurses.h>
+
+/* Macro */
+#define NORMFRAMEW 35
+#define SECFRAMEW  54
 
 struct ttybattery {
     /* while() boolean */
@@ -37,16 +42,15 @@ struct ttybattery {
         int a, b;
     } geometry;
 
-    /* Multiple battery support */
-    int num_batteries;
+    /* Battery options */
     struct {
-        int charge;
-        int capacity;
-        int time_remaining;
-        int temperature;
-        char status[20];
-        int x, y, w, h;
-    } *batteries;
+        int min_value;       // Valor mínimo para el cambio de color de la batería
+        int max_value;       // Valor máximo para el cambio de color de la batería
+        int low_threshold;   // Umbral de batería baja
+        int normal_color;    // Color normal de los números de la batería
+        int low_color;       // Color para los números de la batería cuando está baja
+        int critical_color;  // Color para los números de la batería cuando es crítica
+    } battery;
 
     /* Low battery notification */
     bool notify_low_battery;
