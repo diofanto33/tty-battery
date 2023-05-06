@@ -18,23 +18,21 @@
      	{1,1,1,1,0,1,1,1,1,0,0,1,1,1,1}, /* 9 */
 };
 
-
-void
-draw_number(int n, int x, int y) 
+void draw_number(int n, int x, int y)
 {
     // Recuperar la matriz de booleanos que representa el número
     const bool* num = number[n];
 
+    // Activar los colores y estilo correspondiente
+    attron(COLOR_PAIR(1)); // activar el par de colores definido previamente
+    attron(A_BOLD);        // activar negrita
+
     // Pintar el número en la posición especificada
-    for (int i = 0; i < 15; i++)
-	{
-        for (int j = 0; j < 5; j++)
-		{
-            // Si la matriz indica que el pixel debe estar activado,
-            // se pinta un asterisco en la posición correspondiente
-            if (num[i * 5 + j]) 
-			{
-                mvprintw(y + i, x + j, "^");
+    for (int row = 0; row < 15; row++) {
+        for (int col = 0; col < 15; col++) {
+            if (num[row * 15 + col]) {
+                // Si el valor en la matriz es verdadero, pinta un asterisco en la posición correspondiente
+                mvprintw(y + row, x + col, "*");
             }
         }
     }
@@ -47,7 +45,9 @@ main()
 	initscr();
 	
 	curs_set(0);
-	draw_number(2, 14, 4);
+	start_color();
+	init_pair(1, COLOR_YELLOW, COLOR_BLUE);
+	draw_number(2, 10, 10);
 	//mvprintw(20, 20, "Hola, esta es una ventana ncurses");
 
 	refresh();

@@ -15,6 +15,11 @@ struct ttybattery {
     /* while() boolean */
     bool running;
 
+	/* terminal variables */
+	SCREEN *ttyscr;
+	char *tty;
+    int bg;
+
     /* Running option */
     struct {
         bool screensaver;
