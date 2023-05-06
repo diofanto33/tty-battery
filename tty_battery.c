@@ -7,6 +7,8 @@
 void
 draw_number(int n, int x, int y)
 {
-    
+    n = n;
+    x = x;
+    y = y;
      return;
 }
