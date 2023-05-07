@@ -11,7 +11,24 @@
 #define NORMFRAMEW 35
 #define SECFRAMEW  54
 
-struct ttybattery {
+typedef struct {
+    unsigned int charge;
+    unsigned int capacity;
+    unsigned int time_remaining;
+    int temperature;
+    char status[20];
+} BATTERY_STATE;
+
+typedef struct {
+    int min_value;       // Valor mínimo para el cambio de color de la batería
+    int max_value;       // Valor máximo para el cambio de color de la batería
+    int low_threshold;   // Umbral de batería baja
+    int normal_color;    // Color normal de los números de la batería
+    int low_color;       // Color para los números de la batería cuando está baja
+    int critical_color;  // Color para los números de la batería cuando es crítica
+} BATTERY_OPTIONS;
+
+typedef struct ttybattery {
     /* while() boolean */
     bool running;
 
@@ -28,13 +45,7 @@ struct ttybattery {
     } option;
 
     /* Battery state */
-    struct {
-        int charge;
-        int capacity;
-        int time_remaining;
-        int temperature;
-        char status[20];
-    } state;
+    BATTERY_STATE state;
 
     /* Geometry */
     struct {
@@ -43,14 +54,7 @@ struct ttybattery {
     } geometry;
 
     /* Battery options */
-    struct {
-        int min_value;       // Valor mínimo para el cambio de color de la batería
-        int max_value;       // Valor máximo para el cambio de color de la batería
-        int low_threshold;   // Umbral de batería baja
-        int normal_color;    // Color normal de los números de la batería
-        int low_color;       // Color para los números de la batería cuando está baja
-        int critical_color;  // Color para los números de la batería cuando es crítica
-    } battery;
+    BATTERY_OPTIONS battery;
 
     /* Low battery notification */
     bool notify_low_battery;
@@ -58,7 +62,7 @@ struct ttybattery {
 
     /* Power source notification */
     bool notify_power_source;
-};
+} TTY_BATTERY;
 
 /* prototypes */
 void init(void);
@@ -71,18 +75,18 @@ void set_notify_power_source(bool b);
 
 
 /* Number matrix */
-const bool number[][15] =
-{
-     {1,1,1,1,0,1,1,0,1,1,0,1,1,1,1}, /* 0 */
-     {0,0,1,0,0,1,0,0,1,0,0,1,0,0,1}, /* 1 */
-     {1,1,1,0,0,1,1,1,1,1,0,0,1,1,1}, /* 2 */
-     {1,1,1,0,0,1,1,1,1,0,0,1,1,1,1}, /* 3 */
-     {1,0,1,1,0,1,1,1,1,0,0,1,0,0,1}, /* 4 */
-     {1,1,1,1,0,0,1,1,1,0,0,1,1,1,1}, /* 5 */
-     {1,1,1,1,0,0,1,1,1,1,0,1,1,1,1}, /* 6 */
-     {1,1,1,0,0,1,0,0,1,0,0,1,0,0,1}, /* 7 */
-     {1,1,1,1,0,1,1,1,1,1,0,1,1,1,1}, /* 8 */
-     {1,1,1,1,0,1,1,1,1,0,0,1,1,1,1}, /* 9 */
-};
+//const bool number_matrix[][15] =
+//{
+//     {1,1,1,1,0,1,1,0,1,1,0,1,1,1,1}, /* 0 */
+//     {0,0,1,0,0,1,0,0,1,0,0,1,0,0,1}, /* 1 */
+//     {1,1,1,0,0,1,1,1,1,1,0,0,1,1,1}, /* 2 */
+//     {1,1,1,0,0,1,1,1,1,0,0,1,1,1,1}, /* 3 */
+//     {1,0,1,1,0,1,1,1,1,0,0,1,0,0,1}, /* 4 */
+//     {1,1,1,1,0,0,1,1,1,0,0,1,1,1,1}, /* 5 */
+//     {1,1,1,1,0,0,1,1,1,1,0,1,1,1,1}, /* 6 */
+//     {1,1,1,0,0,1,0,0,1,0,0,1,0,0,1}, /* 7 */
+//     {1,1,1,1,0,1,1,1,1,1,0,1,1,1,1}, /* 8 */
+//     {1,1,1,1,0,1,1,1,1,0,0,1,1,1,1}, /* 9 */
+//};
 
 #endif // TTYS_BATTERY_H
