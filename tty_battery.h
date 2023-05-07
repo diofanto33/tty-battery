@@ -11,12 +11,22 @@
 #define NORMFRAMEW 35
 #define SECFRAMEW  54
 
+typedef enum {
+    BATTERY_FULL,
+    BATTERY_HIGH,
+    BATTERY_NORMAL,
+    BATTERY_LOW,
+    BATTERY_CRITICAL,
+    BATTERY_UNKNOWN,
+} BATTERY_LEVEL_STATUS;
+
 typedef struct {
     unsigned int charge;
     unsigned int capacity;
     unsigned int time_remaining;
     int temperature;
     char status[20];
+    BATTERY_LEVEL_STATUS level_status;
 } BATTERY_STATE;
 
 typedef struct {
